@@ -29,4 +29,13 @@ public class NgoService {
 		ngoRepository.findAll().forEach(ngos::add);
 		return ngos;
 	}
+	
+	public Ngo getNgo(String name, String password) {
+		Ngo ngo = ngoRepository.findById(name).orElse(null);
+		// if the ngo is not in the database or the password doesn't match, return null
+		if (ngo == null || !password.equals(ngo.getPassword())) {
+			return null;
+		}
+		return ngo;
+	}
 }
