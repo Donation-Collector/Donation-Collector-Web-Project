@@ -1,24 +1,24 @@
 package com.example.dc.controller;
 
 import com.example.dc.model.DonationRequest;
-import com.example.dc.service.AcceptRequestService;
+import com.example.dc.service.PendingRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-public class AcceptRequestController {
+public class PendingRequestController {
     @Autowired
-    AcceptRequestService acceptRequestService;
+    PendingRequestService pendingRequestService;
 
-    @RequestMapping("/acceptRequest/{NGOId}")
+    @RequestMapping("/pendingRequest/{NGOId}")
     public List<DonationRequest> getTopic(@PathVariable Long NGOId) {
-        return acceptRequestService.getRequest(NGOId);
+        return pendingRequestService.getRequest(NGOId);
     }
 
     @RequestMapping(method= RequestMethod.POST, value="/acceptRequest/{NGOId}")
-    public boolean acceptRequest(@RequestBody List<Long> requestIds, @PathVariable Long NGOId) {
-        return acceptRequestService.updateRequest(requestIds, NGOId);
+    public boolean pendingRequest(@RequestBody List<Long> requestIds, @PathVariable Long NGOId) {
+        return pendingRequestService.updateRequest(requestIds, NGOId);
     }
 }
