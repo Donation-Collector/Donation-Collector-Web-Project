@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AcceptRequestService {
+public class PendingRequestService {
    @Autowired
     private RequestRepository requestRepository;
 
