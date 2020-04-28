@@ -1,6 +1,7 @@
 package com.example.dc.controller;
 
 import com.example.dc.model.DonationRequest;
+import com.example.dc.model.IdOfRequest;
 import com.example.dc.service.AcceptedRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class AcceptedRequestController {
     }
 
     @RequestMapping(method= RequestMethod.POST, value="/acceptedRequest/{NGOId}")
-    public boolean acceptRequest(@RequestBody List<Long> requestIds, @PathVariable Long NGOId) {
+    public boolean acceptRequest(@RequestBody List<IdOfRequest> requestIds, @PathVariable Long NGOId) {
         return acceptedRequestService.updateRequest(requestIds, NGOId);
     }
 }
