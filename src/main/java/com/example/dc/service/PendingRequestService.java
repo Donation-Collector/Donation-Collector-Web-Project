@@ -27,6 +27,9 @@ public class PendingRequestService {
         }
         List<DonationRequest> requests = (List<DonationRequest>) requestRepository.findAllById(requestIdLong);
         for (DonationRequest request : requests) {
+            if (request.getStatus().equals("accepted")) {
+                return false;
+            }
             request.setStatus("accepted");
             requestRepository.save(request);
         }

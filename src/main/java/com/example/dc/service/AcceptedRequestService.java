@@ -27,6 +27,9 @@ public class AcceptedRequestService {
         }
         List<DonationRequest> requests = (List<DonationRequest>) requestRepository.findAllById(requestIdLong);
         for (DonationRequest request : requests) {
+            if (request.getStatus().equals("completed")) {
+                return false;
+            }
             request.setStatus("completed");
             requestRepository.save(request);
         }
