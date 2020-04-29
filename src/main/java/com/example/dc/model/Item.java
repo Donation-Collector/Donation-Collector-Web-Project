@@ -2,6 +2,7 @@ package com.example.dc.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "item")
+@Data
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
