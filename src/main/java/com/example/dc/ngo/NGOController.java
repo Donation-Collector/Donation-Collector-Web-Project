@@ -1,5 +1,6 @@
 package com.example.dc.ngo;
 
+import com.example.dc.model.Address;
 import com.example.dc.model.NGO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,11 +26,11 @@ public class NGOController {
 		return ngoService.addNGO(ngo);
 	}
 	
-	// return if there's such ngo in the database with the same name and password
+	// If the name and password match an ngo the database, return the ngo's id. Otherwise, return null
 	@RequestMapping(method=RequestMethod.POST, value="/login")
-	public boolean login(@RequestBody User user) {
+	public Long login(@RequestBody User user) {
 		NGO ngo = ngoService.getNGO(user.getName(), user.getPassword());
-		return ngo != null;
+		return ngo == null ? null : ngo.getId();
 	}
 	
 	@RequestMapping("/hello")
