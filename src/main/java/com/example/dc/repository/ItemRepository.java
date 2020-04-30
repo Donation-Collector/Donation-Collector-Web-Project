@@ -6,10 +6,12 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface ItemRepository extends CrudRepository<Item, Integer> {
+public interface ItemRepository extends CrudRepository<Item, Long> {
+    List<Item> findByDonationRequestId(Long donationRequestId);
     @Query(value = "select item.* from item item " +
             "left join donation_request dr on dr.id = item.request_id " +
             "left join ngo ngo on ngo.id = dr.ngo_id " +
             "where dr.id=?1", nativeQuery = true)
-    List<Item> getItemByReq(Integer req);
+    List<Item> getItemByReq(Long req);
+
 }

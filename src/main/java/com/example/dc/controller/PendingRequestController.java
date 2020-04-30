@@ -1,6 +1,7 @@
 package com.example.dc.controller;
 
 import com.example.dc.model.DonationRequest;
+import com.example.dc.model.DonationRequestWithItem;
 import com.example.dc.model.IdOfRequest;
 import com.example.dc.service.PendingRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class PendingRequestController {
     PendingRequestService pendingRequestService;
 
     @RequestMapping("/pendingRequest/{NGOId}")
-    public List<DonationRequest> getTopic(@PathVariable Long NGOId) {
+    public List<DonationRequestWithItem> getTopic(@PathVariable Long NGOId) {
 
         return pendingRequestService.getRequest(NGOId);
     }

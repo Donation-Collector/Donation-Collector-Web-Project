@@ -1,6 +1,6 @@
 package com.example.dc.controller;
 
-import com.example.dc.model.DonationRequest;
+import com.example.dc.model.DonationRequestWithItem;
 import com.example.dc.model.IdOfRequest;
 import com.example.dc.service.AcceptedRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ public class AcceptedRequestController {
     AcceptedRequestService acceptedRequestService;
 
     @RequestMapping("/acceptedRequest/{NGOId}")
-    public List<DonationRequest> getTopic(@PathVariable Long NGOId) {
+    public List<DonationRequestWithItem> getTopic(@PathVariable Long NGOId) {
         return acceptedRequestService.getRequest(NGOId);
     }
 

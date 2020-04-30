@@ -1,6 +1,6 @@
 package com.example.dc.controller;
 
-import com.example.dc.model.DonationRequest;
+import com.example.dc.model.DonationRequestWithItem;
 import com.example.dc.service.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +15,7 @@ public class HistoryController {
     HistoryService historyService;
 
     @RequestMapping("/history/{NGOId}")
-    public List<DonationRequest> getTopic(@PathVariable Long NGOId) {
+    public List<DonationRequestWithItem> getTopic(@PathVariable Long NGOId) {
         return historyService.getRequest(NGOId);
     }
 }

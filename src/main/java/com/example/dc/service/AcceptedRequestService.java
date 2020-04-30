@@ -1,7 +1,7 @@
 package com.example.dc.service;
 
-import com.example.dc.model.DonationRequest;
-import com.example.dc.model.IdOfRequest;
+import com.example.dc.model.*;
+import com.example.dc.repository.ItemRepository;
 import com.example.dc.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,11 +13,13 @@ import java.util.List;
 public class AcceptedRequestService {
     @Autowired
     private RequestRepository requestRepository;
+    @Autowired
+    private GetItems getItems;
 
-    public List<DonationRequest> getRequest(Long NGOId) {
+    public List<DonationRequestWithItem> getRequest(Long NGOId) {
         List<DonationRequest> requests = new ArrayList<>();
         requestRepository.findByStatusAndNgoId("accepted", NGOId).forEach(requests :: add);
-        return requests;
+        return getItems.getItem(requests);
     }
 
     public boolean updateRequest(List<IdOfRequest> requestIds, Long NGOId) {
