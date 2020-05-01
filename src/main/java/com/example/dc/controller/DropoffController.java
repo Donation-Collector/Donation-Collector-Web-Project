@@ -1,5 +1,6 @@
 package com.example.dc.controller;
 
+import com.example.dc.dto.DropOffDto;
 import com.example.dc.model.NGO;
 import com.example.dc.service.DropoffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class DropoffController {
      * @return
      */
     @GetMapping("/dropoff/{zipcode}")
-    public List<NGO> dropoff(@PathVariable("zipcode") String zipcode) {
+    public List<DropOffDto> dropoff(@PathVariable("zipcode") String zipcode) {
 
-        return dropoffService.dropoff(zipcode);
+        return dropoffService.getDropoffs(zipcode);
     }
 }
