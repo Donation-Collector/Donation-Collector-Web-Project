@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono;
 
 public class ZipCodeDistance {
 
-    static final String APIKEY = "px1ZLWIAkaPnIEVcLyRdHJORRETws0c7je8FdLbHGBBW6WQtf3xi4QJZkcFUXehW";
+    static final String APIKEY = "Jw8HU79QoBb4LJTY6QFYn0Ipskdfk32nLFHmhI2G29HgxG6vdK9tomzWibBsbkor";
     static final String FORMAT = "json";
     static final String UNITS = "km";
 

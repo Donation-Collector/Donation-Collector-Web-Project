@@ -1,13 +1,11 @@
 package com.example.dc.controller;
 
 
+import com.example.dc.dto.NGODto;
 import com.example.dc.model.PickupInput;
 import com.example.dc.service.PickupService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -16,18 +14,23 @@ public class PickupController {
     @Autowired
     private PickupService pickupService;
 
-    /**
-     * input:pickup request
-     * output:
-     *      List item:book, clothes, furnitures, toys,others(miscellaneous)
-     * ,the initial number of the item, the ngo list
-     * @param
-     * @return
-     */
-    @GetMapping("/pickup")
-    public Map getitem() {
+//    /**
+//     * input:pickup request
+//     * output:
+//     *      List item:book, clothes, furnitures, toys,others(miscellaneous)
+//     * ,the initial number of the item, the ngo list
+//     * @param
+//     * @return
+//     */
+//    @GetMapping("/pickup")
+//    public Map getitem() {
+//
+//        return pickupService.getitem();
+//    }
 
-        return pickupService.getitem();
+    @GetMapping("/pickup/{zipCode}")
+    public Iterable<NGODto> showNGOInRange(@PathVariable("zipCode") int zipCode) {
+        return pickupService.showNGOInRange(zipCode);
     }
 
     /**

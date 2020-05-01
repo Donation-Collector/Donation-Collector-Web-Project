@@ -1,6 +1,8 @@
 package com.example.dc.service;
 
-
+import com.example.dc.External.ZipCodeDistance;
+import com.example.dc.dto.DropOffDto;
+import com.example.dc.dto.NGODto;
 import com.example.dc.model.Item;
 import com.example.dc.model.NGO;
 import com.example.dc.model.PickupInput;
@@ -24,11 +26,12 @@ public class PickupService {
 
     @Autowired
     private ItemRepository itemRepository;
+
     @Autowired
     private AddressRepository addressRepository;
+
     @Autowired
     private RequestRepository donationRequestRepository;
-
 
     public Map getitem() {
         Map result = new HashMap();
@@ -46,6 +49,25 @@ public class PickupService {
         return result;
     }
 
+    public Iterable<NGODto> showNGOInRange(int zipCode) {
+        Iterable<NGO> ngos = ngoRepository.findAll();
+        List<NGODto> list = new ArrayList<>();
+        for(NGO ngo : ngos) {
+            int distance = ZipCodeDistance.getDistance(Integer.parseInt(ngo.getAddress().getZipcode()), zipCode);
+            if (distance < 60) {
+                list.add(NGODto.builder()
+                        .name(ngo.getName())
+                        .phoneNum(ngo.getPhoneNum())
+                        .email(ngo.getEmail())
+                        .description((ngo.getDescription()))
+                        .distance(distance)
+                        .build());
+            }
+        }
+
+        return list;
+    }
+
     @Transactional
     public String pickup(PickupInput input) {
         if (input.getAddress() != null) {
@@ -56,6 +78,7 @@ public class PickupService {
         if (input.getDonationRequest() != null) {
             input.getDonationRequest().setNgo(input.getNgo());
             input.getDonationRequest().setAddress(input.getAddress());
+            input.getDonationRequest().setStatus("pending");
             donationRequestRepository.save(input.getDonationRequest());
         } else {
             return "donationRequest is null";
