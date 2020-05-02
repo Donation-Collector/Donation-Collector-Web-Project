@@ -1,8 +1,6 @@
 package com.example.dc.service;
 
-import com.example.dc.controller.SendEmail;
 import com.example.dc.model.*;
-import com.example.dc.repository.ItemRepository;
 import com.example.dc.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

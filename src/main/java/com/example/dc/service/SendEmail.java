@@ -1,4 +1,4 @@
-package com.example.dc.controller;
+package com.example.dc.service;
 import org.springframework.stereotype.Service;
 
 import javax.mail.Message;
@@ -49,7 +49,7 @@ public class SendEmail {
     );
 
     public void main(String TO, String STATUS) throws Exception {
-        final String SUBJECT = "Your Donation Request is" + STATUS;
+        final String SUBJECT = "Your Donation Request is " + STATUS;
         // Create a Properties object to contain connection configuration information.
         Properties props = System.getProperties();
         props.put("mail.transport.protocol", "smtp");

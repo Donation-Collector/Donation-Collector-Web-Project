@@ -1,6 +1,6 @@
 package com.example.dc.TimingTasks;
 
-import com.example.dc.controller.SendEmail;
+import com.example.dc.service.SendEmail;
 import com.example.dc.model.DonationRequest;
 import com.example.dc.repository.ItemRepository;
 import com.example.dc.repository.RequestRepository;
@@ -9,8 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
 
 @Component
 public class CheckingExpiredRequest {
