@@ -1,7 +1,7 @@
 package com.example.dc.service;
 
+import com.example.dc.controller.SendEmail;
 import com.example.dc.model.*;
-import com.example.dc.repository.ItemRepository;
 import com.example.dc.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +16,8 @@ public class PendingRequestService {
 
    @Autowired
    private GetItems getItems;
+   @Autowired
+   private SendEmail sendEmail;
 
     public List<DonationRequestWithItem> getRequest(Long NGOId) {
         List<DonationRequest> requests = new ArrayList<>();
@@ -23,7 +25,7 @@ public class PendingRequestService {
         return getItems.getItem(requests);
     }
 
-    public boolean updateRequest(List<IdOfRequest> requestIds, Long NGOId) {
+    public boolean updateRequest(List<IdOfRequest> requestIds, Long NGOId) throws Exception {
         List<Long> requestIdLong = new ArrayList<>();
         for (IdOfRequest requestId : requestIds) {
             requestIdLong.add(requestId.getId());
@@ -35,6 +37,7 @@ public class PendingRequestService {
             }
             request.setStatus("accepted");
             requestRepository.save(request);
+            sendEmail.main(request.getEmail(), "accepted");
         }
         return true;
     }
