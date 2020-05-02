@@ -1,5 +1,6 @@
 package com.example.dc.TimingTasks;
 
+import com.example.dc.controller.SendEmail;
 import com.example.dc.model.DonationRequest;
 import com.example.dc.repository.ItemRepository;
 import com.example.dc.repository.RequestRepository;
@@ -17,6 +18,9 @@ public class CheckingExpiredRequest {
 
     @Autowired
     ItemRepository itemRepository;
+
+    @Autowired
+    SendEmail sendEmail;
 
     static final int TIMEOUT = 14 * 24 * 60 * 60 * 1000; // two weeks
 
@@ -56,6 +60,7 @@ public class CheckingExpiredRequest {
 //                itemRepository.deleteByDonationRequest(request);
 //                requestRepository.delete(request);
 //                // notify resident here
+//                sendEmail.main(request.getEmail(), "cancelled");
 //            }
 //        }
 //        round++;
