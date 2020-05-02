@@ -13,5 +13,5 @@ public class PickupInput {
 
     private DonationRequest donationRequest;
 
-    private NGO ngo;
+    private String ngoName;
 }

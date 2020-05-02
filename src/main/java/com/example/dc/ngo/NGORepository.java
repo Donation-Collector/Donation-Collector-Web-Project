@@ -5,8 +5,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface NGORepository extends CrudRepository<NGO, String>{
     @Query(value = "select ngo.* from  ngo left join address addr on addr.id = ngo.address_id where addr.zipcode = ?1", nativeQuery = true)
     List<NGO> getNGOByZipcode(String zipcode);
+
+    NGO findNGOByName(String name);
 }
