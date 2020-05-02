@@ -19,7 +19,7 @@ public class AcceptedRequestController {
     }
 
     @RequestMapping(method= RequestMethod.POST, value="/acceptedRequest/{NGOId}")
-    public boolean acceptRequest(@RequestBody List<IdOfRequest> requestIds, @PathVariable Long NGOId) {
+    public boolean acceptRequest(@RequestBody List<IdOfRequest> requestIds, @PathVariable Long NGOId) throws Exception {
         return acceptedRequestService.updateRequest(requestIds, NGOId);
     }
 }

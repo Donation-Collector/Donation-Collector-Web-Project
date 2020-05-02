@@ -21,7 +21,7 @@ public class PendingRequestController {
     }
 
     @RequestMapping(method= RequestMethod.POST, value="/pendingRequest/{NGOId}")
-    public boolean acceptRequest(@RequestBody List<IdOfRequest> requestIds, @PathVariable Long NGOId) {
+    public boolean acceptRequest(@RequestBody List<IdOfRequest> requestIds, @PathVariable Long NGOId) throws Exception {
         return pendingRequestService.updateRequest(requestIds, NGOId);
     }
 }

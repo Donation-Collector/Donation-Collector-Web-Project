@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class CheckingExpiredRequest {
 
@@ -26,7 +28,7 @@ public class CheckingExpiredRequest {
 
     private static final Logger log = LoggerFactory.getLogger(CheckingExpiredRequest.class);
 
-//    periodically check
+    //periodically check
 //    @Scheduled(fixedRate = 24 * 60 * 1000) // check once a day
 //    public void checkExpiredRequest() {
 //        log.info("Checking expired requests...");
@@ -47,22 +49,22 @@ public class CheckingExpiredRequest {
 //        log.info("Found and removed " + cnt + " expired requests.");
 //    }
 
-    // for demo
-//    int round = 0;
-//    @Scheduled(fixedRate = 10 * 1000)
-//    public void checkExpiredRequest() {
-//        log.info("Checking expired requests...");
-//
-//        Iterable<DonationRequest> requests = requestRepository.findAll();
-//        for (DonationRequest request : requests) {
-//            if (round == 1 && request.getNgo().getId() == 135) {
-//                log.info("Request " + request.getId() + " to " + request.getNgo().getName() + " is expired and removed.");
-//                itemRepository.deleteByDonationRequest(request);
-//                requestRepository.delete(request);
-//                // notify resident here
-//                sendEmail.main(request.getEmail(), "cancelled");
-//            }
-//        }
-//        round++;
-//    }
+     //for demo
+    int round = 0;
+    @Scheduled(fixedRate = 10 * 1000)
+    public void checkExpiredRequest() throws Exception {
+        log.info("Checking expired requests...");
+
+        Iterable<DonationRequest> requests = requestRepository.findAll();
+        for (DonationRequest request : requests) {
+            if (round == 1 && request.getNgo().getId() == 135) {
+                log.info("Request " + request.getId() + " to " + request.getNgo().getName() + " is expired and removed.");
+                itemRepository.deleteByDonationRequest(request);
+                requestRepository.delete(request);
+                // notify resident here
+                sendEmail.main(request.getEmail(), "cancelled");
+            }
+        }
+        round++;
+    }
 }
