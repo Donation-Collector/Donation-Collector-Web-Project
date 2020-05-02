@@ -1,9 +1,11 @@
 package com.example.dc.repository;
 
+import com.example.dc.model.DonationRequest;
 import com.example.dc.model.Item;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface ItemRepository extends CrudRepository<Item, Long> {
@@ -14,4 +16,6 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
             "where dr.id=?1", nativeQuery = true)
     List<Item> getItemByReq(Long req);
 
+    @Transactional
+    void deleteByDonationRequest(DonationRequest request);
 }
