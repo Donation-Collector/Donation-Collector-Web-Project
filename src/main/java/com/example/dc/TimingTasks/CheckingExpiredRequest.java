@@ -48,21 +48,19 @@ public class CheckingExpiredRequest {
 //    }
 
      //for demo
-    int round = 0;
-    @Scheduled(fixedRate = 10 * 1000)
+    @Scheduled(initialDelay = 10 * 1000, fixedRate = 10 * 1000)
     public void checkExpiredRequest() throws Exception {
         log.info("Checking expired requests...");
 
         Iterable<DonationRequest> requests = requestRepository.findAll();
         for (DonationRequest request : requests) {
-            if (round == 1 && request.getNgo().getId() == 135) {
+            if (request.getNgo().getId() == 135) {
                 log.info("Request " + request.getId() + " to " + request.getNgo().getName() + " is expired and removed.");
                 itemRepository.deleteByDonationRequest(request);
                 requestRepository.delete(request);
                 // notify resident here
-                sendEmail.main(request.getEmail(), "cancelled");
+                sendEmail.main(request.getEmail(), " cancelled");
             }
         }
-        round++;
     }
 }
